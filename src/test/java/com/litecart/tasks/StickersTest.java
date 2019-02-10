@@ -26,7 +26,7 @@ public class StickersTest {
     }
 
     @Test
-    public void myFirstTest() {
+    public void presenceStickersInGoods() {
         driver.get("http://localhost/litecart/");
 
         List<WebElement> products = driver.findElements(By.cssSelector("li.product"));

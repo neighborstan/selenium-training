@@ -24,15 +24,15 @@ public class AdminPanelTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
-    }
-
-    @Test
-    public void myFirstTest() {
+        
         driver.get("http://localhost/litecart/admin/");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("login")).click();
+    }
 
+    @Test
+    public void presenceReferencesAndHeaders() {
         int numMainMenu = getNumberOfElementsFound(By.cssSelector("#app- > a"));
         for (int i = 0; i < numMainMenu; i++) {
             getElementWithIndex(By.cssSelector("#app- > a"), i).click();
@@ -47,11 +47,11 @@ public class AdminPanelTest {
         }
     }
 
-    public int getNumberOfElementsFound(By by) {
+    private int getNumberOfElementsFound(By by) {
         return driver.findElements(by).size();
     }
 
-    public WebElement getElementWithIndex(By by, int pos) {
+    private WebElement getElementWithIndex(By by, int pos) {
         return driver.findElements(by).get(pos);
     }
 
