@@ -25,7 +25,7 @@ public class CorrectProductPageTest {
     }
 
     @Test
-    public void testMethod(){
+    public void correctProductPage(){
         final String REGULAR_PRICE_CAMPAIGN_PATH = "#box-campaigns > div > ul > li > a.link > div.price-wrapper > s";
         final String CAMPAIGN_PRICE_PATH = "#box-campaigns > div > ul > li > a.link > div.price-wrapper > strong";
 
