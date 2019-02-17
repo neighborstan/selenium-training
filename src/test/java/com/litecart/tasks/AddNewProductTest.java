@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AddNewProductTest {
 
@@ -37,7 +38,7 @@ public class AddNewProductTest {
     }
 
     @Test
-    public void addNewProduct(){
+    public void addNewProduct() {
         driver.findElement(By.xpath("//li[@id='app-']/a[span[contains(text(), 'Catalog')]]")).click();
         driver.findElement(By.xpath("//td[@id='content']//a[contains(text(), 'Add New Product')]")).click();
 
@@ -52,7 +53,6 @@ public class AddNewProductTest {
         driver.findElement(By.xpath("//input[@type='file']")).sendKeys("G://addNewDuck.png");
         driver.findElement(By.xpath("//input[@type='date'][@name='date_valid_from']")).sendKeys("01.01.1980");
         driver.findElement(By.xpath("//input[@type='date'][@name='date_valid_to']")).sendKeys("01.01.1980");
-
 
         // Information
         driver.findElement(By.xpath("//a[contains(text(), 'Information')]")).click();
@@ -75,7 +75,17 @@ public class AddNewProductTest {
 
         driver.findElement(By.xpath("//button[contains(text(), 'Save')]")).click();
 
-        assertEquals("test name", driver.findElement(By.xpath("//tr[@class='footer']/preceding-sibling::tr//a[contains(text(), 'test name')]")).getText());
+        assertTrue(isElementPresent(driver, By.xpath("//tr[@class='footer']/preceding-sibling::tr//a[contains(text(), 'test name')]")));
 //        JOptionPane.showInputDialog("Please enter the captcha value:");
     }
+
+    private boolean isElementPresent(WebDriver driver, By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
 }
